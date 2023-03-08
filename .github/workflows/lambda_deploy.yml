@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  setups:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Source Checkout
+      - uses: actions/checkout@v3
+
+      - name: Check current path
+        run: ls -al
+
+      - name: Setup Golang
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+
+      - name: Build
+        run: go build ./lambdas/echo/main.go
+        
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.KEY_AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.KEY_AWS_SECRET_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: SAM Init
+        run : |
+          pip install --ignore-installed --quiet aws-sam-cli \
+          sam --version
+          
+      - name: SAM Package
+        run: |
+          sam package \
+          --template-file ./lambdas/echo/template.yaml \
+          --output-template-file ./lambdas/echo/package.yaml \
+          --s3-bucket lambda-fn-storages
+
+      - name: SAM Deploy
+        run: |
+          sam deploy \
+          --template-file ./lambdas/echo/package.yaml \
+          --stack-name stackEcho \
+          --capabilities CAPABILITY_NAMED_IAM

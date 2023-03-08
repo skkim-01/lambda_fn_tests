@@ -1,0 +1,10 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  lambda-go-echo:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: Go1.x
+      CodeUri: ./echo/main
+      MemorySize: 128
+      Timeout: 30
