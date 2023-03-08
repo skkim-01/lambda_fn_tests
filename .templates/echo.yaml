@@ -6,8 +6,8 @@ Resources:
     Properties:
       FunctionName: lambda-go-echo
       PackageType: Zip
-      Handler: lambda
+      Handler: main.go
       Runtime: go1.x
-      CodeUri: lambdas/echo
+      CodeUri: ../lambdas/echo
       MemorySize: 128
       Timeout: 30
