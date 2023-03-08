@@ -48,4 +48,3 @@ jobs:
           --template-file package.yaml \
           --stack-name stackEcho \
           --capabilities CAPABILITY_NAMED_IAM
-          --no-confirm-changeset
