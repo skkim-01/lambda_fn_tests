@@ -33,7 +33,7 @@ jobs:
         run: go mod tidy -go=1.19
 
       - name: Build with SAM
-        run: sam build
+        run: sam build -t ./.templates/echo.yaml
 
       - name: SAM Package
         run: |
