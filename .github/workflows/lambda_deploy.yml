@@ -38,7 +38,7 @@ jobs:
       - name: SAM Package
         run: |
           sam package \
-          --template-file ./lambdas/echo/template.yaml \
+          --template-file ./.templates/echo.yaml \
           --output-template-file package.yaml \
           --s3-bucket lambda-fn-storages
 
