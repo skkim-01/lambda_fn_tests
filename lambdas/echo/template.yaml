@@ -1,9 +1,12 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Resources:
-  lambdagoecho:
+  EchoFunction:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: lambda-go-echo
+      PackageType: Zip
+      Handler: lambda
       Runtime: Go1.x
       CodeUri: main
       MemorySize: 128
