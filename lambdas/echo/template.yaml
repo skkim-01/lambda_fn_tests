@@ -5,6 +5,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Runtime: Go1.x
-      CodeUri: ./echo/main
+      CodeUri: ./lambdas/echo/main
       MemorySize: 128
       Timeout: 30
